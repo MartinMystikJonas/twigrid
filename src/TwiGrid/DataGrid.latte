@@ -110,7 +110,7 @@
 {/ifset}
 		{/foreach}
 
-		<th class="header-cell" n:if="$hasFilters || $hasRowActions || $hasInlineEdit">&nbsp;</th>
+		<th class="header-cell header-actions-cell" n:if="$hasFilters || $hasRowActions || $hasInlineEdit">&nbsp;</th>
 	</tr>
 
 {/define}
@@ -247,7 +247,7 @@
 {/if}
 		{/foreach}
 
-			<td n:if="$hasFilters || $hasRowActions || $hasInlineEdit" class="body-cell center">
+			<td n:if="$hasFilters || $hasRowActions || $hasInlineEdit" class="body-cell body-actions-cell center">
 			{if $hasRowActions || $hasInlineEdit}
 {include #row-actions, i => $iterator->counter - 1, record => $record, isInlineEdited => $isInlineEdited, primaryString => $primaryString |indent:3}
 
