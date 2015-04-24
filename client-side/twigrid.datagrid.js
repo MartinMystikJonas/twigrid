@@ -88,7 +88,7 @@ $.nette.ext({
 			// filtering
 			self.filterBehavior(
 				gHeader.find(':input:not(' + self.buttonSelector() + ')'),
-				gHeader.find('select[name^="' + self.escape('filters[criteria][') + '"]').not("*[multiple]"),
+        gHeader.find('select[name^="' + self.escape('filters[criteria][') + '"]:not([multiple])'),
 				filterSubmit
 			);
 
