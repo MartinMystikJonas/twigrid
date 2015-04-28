@@ -218,7 +218,7 @@
 	{foreach $dataLoader() as $record}
 		{var $primaryString = $template->primaryToString($record),
 			$isInlineEdited = $hasInlineEdit && $iePrimary === $primaryString}
-		<tr n:class="$isInlineEdited ? success">
+		<tr n:class="$isInlineEdited ? success" n:snippet="row-$primaryString">
 
 			<td class="body-cell center" n:if="$hasGroupActions">
 				{var $inputKey = $iterator->counter - 1}
