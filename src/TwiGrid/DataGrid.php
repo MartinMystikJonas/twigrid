@@ -894,6 +894,7 @@ class DataGrid extends Nette\Application\UI\Control
 		$this->passForm() && ($template->form = $template->_form = $form = $this['form'])
 				&& $this->presenter->payload->twiGrid['forms'][$form->elementPrototype->id] = (string) $form->getAction();
 		$this->presenter->payload->twiGrid['iePrimary'][$form->elementPrototype->id] = $this->iePrimary;
+		$template->redrawWholeBody = empty($this->redrawRows);
 		$template->columns = $this->getColumns();
 		$template->dataLoader = $this->getTemplateData;
 		$template->csrfToken = Helpers::getCsrfToken($this->session, $this->sessNamespace);
