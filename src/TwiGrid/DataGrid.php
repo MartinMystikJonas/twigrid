@@ -891,7 +891,7 @@ class DataGrid extends Nette\Application\UI\Control
 		});
 
 		$this->isControlInvalid() && $this->redraw(FALSE, 'flashes');
-		$this->passForm() && ($template->form = $template->_form = $form = $this['form'])
+		($template->form = $template->_form = $form = $this['form'])
 				&& $this->presenter->payload->twiGrid['forms'][$form->elementPrototype->id] = (string) $form->getAction();
 		$this->presenter->payload->twiGrid['iePrimary'][$form->elementPrototype->id] = $this->iePrimary;
 		$template->redrawWholeBody = empty($this->redrawRows);
