@@ -267,7 +267,7 @@ class DataGrid extends Nette\Application\UI\Control
 	 */
 	function translate($s, $count = NULL)
 	{
-		return $this->translator === NULL ? spr_replace('%count%', $count, (string) $s)
+		return $this->translator === NULL ? str_replace('%count%', $count, (string) $s)
 			: $this->translator->translate((string) $s, $count);
 	}
 
