@@ -94,7 +94,7 @@
 {define header-sort-row}
 
 	<tr n:snippet="header-sort">
-		<th rowspan="2" class="header-cell center" n:if="$hasGroupActions"></th>
+		<th rowspan="2" class="header-cell header-group-cell center" n:if="$hasGroupActions"></th>
 
 		{foreach $columns as $name => $column}
 {var $params = [
