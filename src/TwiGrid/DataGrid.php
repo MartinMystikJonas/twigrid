@@ -857,19 +857,15 @@ class DataGrid extends Nette\Application\UI\Control
 			|| $this->isControlInvalid('footer');
 	}
 
-	public function getTemplateData() {
-		$data = $this->getData();
-		if($this->getPresenter()->isAjax() && !empty($this->redrawRows)) {
-			$redrawData = array();
-			foreach($data as $record) {
-				if(in_array($this->getRecord()->primaryToString($record), $this->redrawRows)) {
-					$redrawData[] = $record;
-				}
-			}
-			$data = $redrawData;
-		}
-		return $data;
-	}
+  private function getRedrawRows($data) {
+ 		$redrawRows = array();
+ 		foreach($data as $record) {
+ 			if(in_array($this->getRecord()->primaryToString($record), $this->redrawRows)) {
+ 				$redrawRows[] = $record;
+ 			}
+ 		}
+ 		return $redrawRows;
+ 	}
 
 
 	/** @return void */
@@ -894,9 +890,19 @@ class DataGrid extends Nette\Application\UI\Control
 		($template->form = $template->_form = $form = $this['form'])
 				&& $this->presenter->payload->twiGrid['forms'][$form->elementPrototype->id] = (string) $form->getAction();
 		$this->presenter->payload->twiGrid['iePrimary'][$form->elementPrototype->id] = $this->iePrimary;
-		$template->redrawWholeBody = empty($this->redrawRows);
 		$template->columns = $this->getColumns();
-		$template->dataLoader = $this->getTemplateData;
+
+    $data = $this->getData();
+		$template->data = $data;
+		$template->redrawWholeBody = true;
+		if($this->getPresenter()->isAjax() && !empty($this->redrawRows)) {
+			$redrawData = $this->getRedrawRows($data);
+			if (count($redrawData) > 0) {
+				$template->data = $redrawData;
+				$template->redrawWholeBody = false;
+			}
+		}
+
 		$template->csrfToken = Helpers::getCsrfToken($this->session, $this->sessNamespace);
 		$template->rowActions = $this->getRowActions();
 		$template->hasRowActions = $template->rowActions !== NULL;
